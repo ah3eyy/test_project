@@ -10,7 +10,7 @@ class Idempotency
     const IDEMPOTENCY_HEADER = 'Idempotency-Key';
     const IDEMPOTENCY_EXPIRATION = 1; // in minutes
 
-    
+
     /**
      * Handle an incoming request.
      *
@@ -23,7 +23,7 @@ class Idempotency
         if ($request->hasHeader(self::IDEMPOTENCY_HEADER)) {
             $requestID = $request->header(self::IDEMPOTENCY_HEADER);
 
-            if (!Cache::has($requestID) || env('APP_ENV') == "local") {
+            if (!Cache::has($requestID)) {
 
                 // collect response from the request and cache it
                 $response = $next($request);
